@@ -3,6 +3,16 @@ const fs = require('fs');
 
 const hostname = '127.0.0.1';
 const port = 8080;
+const mimeTypes = {
+  "html": "text/html",
+  "jpeg": "image/jpeg",
+  "jpg": "image/jpeg",
+  "png": "image/png",
+  "svg": "image/svg+xml",
+  "json": "application/json",
+  "js": "text/javascript",
+  "css": "text/css"
+};
 
 const server = http.createServer((req, res) => {
   fs.readFile(__dirname + req.url, function (err,data) {
@@ -11,7 +21,8 @@ const server = http.createServer((req, res) => {
       res.end(JSON.stringify(err));
       return;
     }
-    res.writeHead(200);
+    const mimeType = mimeTypes[req.url.split('.').pop()];
+    res.writeHead(200, { "Content-Type": mimeType });
     res.end(data);
   });
 });
