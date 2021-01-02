@@ -11,7 +11,8 @@ const mimeTypes = {
   "svg": "image/svg+xml",
   "json": "application/json",
   "js": "text/javascript",
-  "css": "text/css"
+  "css": "text/css",
+  "bin": "application/octet-stream",
 };
 
 const server = http.createServer((req, res) => {
